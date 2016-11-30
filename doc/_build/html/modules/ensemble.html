@@ -1,0 +1,329 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Ensemble Methods &mdash; skml 0.1.0b documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="skml 0.1.0b documentation" href="../index.html"/>
+        <link rel="up" title="API Documentation" href="../api.html"/>
+        <link rel="next" title="Multi-label Classification Examples" href="../auto_examples/index.html"/>
+        <link rel="prev" title="Problem Transformation Methods" href="problem_transformation.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> skml
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="problem_transformation.html">Problem Transformation Methods</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Ensemble Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../auto_examples/index.html">Multi-label Classification Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide.html">User Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">skml</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../api.html">API Documentation</a> &raquo;</li>
+      
+    <li>Ensemble Methods</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/modules/ensemble.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ensemble-methods">
+<h1>Ensemble Methods<a class="headerlink" href="#ensemble-methods" title="Permalink to this headline">¶</a></h1>
+<p>Ensemble methods provide multi-label classification compatible ensemble methods,
+where a number of estimators (or classifiers) are used to gather a number of
+predictions, and then obtain votes by majority vote or averaging. This is
+expected to achieve better results, as the diversity of classifiers (optimally)
+works as an error correction to the other classifiers.</p>
+<span class="target" id="module-skml.ensemble"></span><dl class="class">
+<dt id="skml.ensemble.EnsembleClassifierChain">
+<em class="property">class </em><code class="descclassname">skml.ensemble.</code><code class="descname">EnsembleClassifierChain</code><span class="sig-paren">(</span><em>estimator</em>, <em>number_of_chains=10</em>, <em>threshold=0.5</em>, <em>max_features=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/skml/ensemble/ensemble_classifier_chains.html#EnsembleClassifierChain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skml.ensemble.EnsembleClassifierChain" title="Permalink to this definition">¶</a></dt>
+<dd><p class="rubric">Methods</p>
+<dl class="method">
+<dt id="skml.ensemble.EnsembleClassifierChain.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>estimator</em>, <em>number_of_chains=10</em>, <em>threshold=0.5</em>, <em>max_features=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/skml/ensemble/ensemble_classifier_chains.html#EnsembleClassifierChain.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skml.ensemble.EnsembleClassifierChain.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensemble of classifier chains (ECC) trains an ensemble of bagged
+classifier chains. Each chain is trained on a randomly sampled subset
+of the training data (with replacement, also known as bagging).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>classifier</strong> : scikit-learn compatible classifier instance. Will be</p>
+<blockquote>
+<div><p>copied (with all hyperparameters) before use, hence will
+be left untouched.</p>
+</div></blockquote>
+<p><strong>number_of_chains</strong> : Number of chains the ensemble shall train</p>
+<p><strong>threshold</strong> : Decision threshold to assign a label or not. Has to be</p>
+<blockquote>
+<div><p>between 0 and 1.</p>
+</div></blockquote>
+<p><strong>max_features</strong> : Number of features to draw from.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">ensemble classifier chain instance</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="skml.ensemble.EnsembleClassifierChain.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/skml/ensemble/ensemble_classifier_chains.html#EnsembleClassifierChain.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skml.ensemble.EnsembleClassifierChain.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit underlying estimators.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : (sparse) array-like, shape = [n_samples, n_features]</p>
+<blockquote>
+<div><p>Data.</p>
+</div></blockquote>
+<p><strong>y</strong> : (sparse) array-like, shape = [n_samples, ], [n_samples, n_classes]</p>
+<blockquote class="last">
+<div><p>Multi-label targets.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="skml.ensemble.EnsembleClassifierChain.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/skml/ensemble/ensemble_classifier_chains.html#EnsembleClassifierChain.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skml.ensemble.EnsembleClassifierChain.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predicts the labels for the given instances.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : (sparse) array-like, shape = [n_samples, n_features]</p>
+<blockquote>
+<div><p>Data.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">array-like, shape = [n_samples, n_labels]</p>
+<blockquote class="last">
+<div><p>Estimated labels</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="skml.ensemble.EnsembleClassifierChain.predict_proba">
+<code class="descname">predict_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/skml/ensemble/ensemble_classifier_chains.html#EnsembleClassifierChain.predict_proba"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skml.ensemble.EnsembleClassifierChain.predict_proba" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predicts the label probabilites for the given instances. Note that
+these probabilities might not be obtainable, depending on the used
+classifiers. They also might have to be calibrated.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : (sparse) array-like, shape = [n_samples, n_features]</p>
+<blockquote>
+<div><p>Data.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">array-like, shape = [n_samples, n_labels]</p>
+<blockquote class="last">
+<div><p>Estimated labels</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../auto_examples/index.html" class="btn btn-neutral float-right" title="Multi-label Classification Examples" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="problem_transformation.html" class="btn btn-neutral" title="Problem Transformation Methods" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Christian Schulze.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1.0b',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
