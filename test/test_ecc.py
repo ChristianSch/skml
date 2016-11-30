@@ -20,8 +20,6 @@ class TestECC(Chai):
                                            max_features=1.0)
         ensemble.fit(X, y)
         y_pred = ensemble.predict(X)
-        print y_pred.shape
-        print y.shape
         hamming_loss(y, y_pred)
 
     def test_ecc_fit_predict_proba(self):
