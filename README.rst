@@ -2,6 +2,7 @@
 skml
 ====
 .. image:: https://travis-ci.org/ChristianSch/skml.svg?branch=master
+   :target: https://travis-ci.org/ChristianSch/skml
 
 scikit-learn compatible multi-label classification implementations.
 
