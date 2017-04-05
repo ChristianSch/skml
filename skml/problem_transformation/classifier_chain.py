@@ -45,7 +45,7 @@ class ClassifierChain(BaseEstimator, MetaEstimatorMixin, ClassifierMixin):
         validation.check_X_y(X, y, multi_output=True)
         y = validation.check_array(y, accept_sparse=True)
 
-        for i in xrange(y.shape[1]):
+        for i in range(y.shape[1]):
             c = clone(self.estimator)
 
             # at this point, all classifiers in the chain from the nodes before

@@ -23,32 +23,31 @@ cc = ClassifierChain(RandomForestClassifier(),
                      threshold=.5)
 cc.fit(X, np.array(y))
 y_pred = cc.predict(X)
-
-print "real: ", y.shape
-print "y_pred: ", y_pred.shape
 y_pred_proba = cc.predict_proba(X)
-print "pred_proba: ", y_pred_proba
 
-print "hamming loss: "
-print hamming_loss(y, y_pred)
+print("real: ", y.shape)
+print("y_pred: ", y_pred.shape)
 
-print "accuracy:"
-print accuracy_score(y, y_pred)
+print("hamming loss: ")
+print(hamming_loss(y, y_pred))
 
-print "f1 score:"
-print "micro"
-print f1_score(y, y_pred, average='micro')
-print "macro"
-print f1_score(y, y_pred, average='macro')
+print("accuracy:")
+print(accuracy_score(y, y_pred))
 
-print "precision:"
-print "micro"
-print precision_score(y, y_pred, average='micro')
-print "macro"
-print precision_score(y, y_pred, average='macro')
+print("f1 score:")
+print("micro")
+print(f1_score(y, y_pred, average='micro'))
+print("macro")
+print(f1_score(y, y_pred, average='macro'))
 
-print "recall:"
-print "micro"
-print recall_score(y, y_pred, average='micro')
-print "macro"
-print recall_score(y, y_pred, average='macro')
+print("precision:")
+print("micro")
+print(precision_score(y, y_pred, average='micro'))
+print("macro")
+print(precision_score(y, y_pred, average='macro'))
+
+print("recall:")
+print("micro")
+print(recall_score(y, y_pred, average='micro'))
+print("macro")
+print(recall_score(y, y_pred, average='macro'))

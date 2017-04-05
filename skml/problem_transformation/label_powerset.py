@@ -65,7 +65,7 @@ class LabelPowerset(
         max_label = 0
         y_transformed = []
 
-        for i in xrange(y.shape[0]):
+        for i in range(y.shape[0]):
             lstr = ",".join([str(x) for x in y[i]])
 
             if lstr not in self.powerset_lookup.keys():

@@ -54,7 +54,7 @@ class EnsembleClassifierChain(
         validation.check_X_y(X, y, multi_output=True)
         y = validation.check_array(y, accept_sparse=True)
 
-        for i in xrange(self.number_of_chains):
+        for i in range(self.number_of_chains):
             # the classifier gets cloned internally in classifer chains, so
             # no need to do that here.
             cc = ClassifierChain(self.estimator,
@@ -63,7 +63,7 @@ class EnsembleClassifierChain(
             no_samples = y.shape[0]
 
             # create random subset for each chain individually
-            idx = random.sample(xrange(no_samples),
+            idx = random.sample(range(no_samples),
                                 int(no_samples * self.max_features))
             cc.fit(X[idx, :], y[idx, :])
 

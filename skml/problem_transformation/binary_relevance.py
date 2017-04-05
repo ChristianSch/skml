@@ -49,7 +49,7 @@ class BinaryRelevance(
         y = validation.check_array(y, accept_sparse=True)
 
         self.estimators_ = [clone(self.estimator).fit(X, y[:, i])
-                            for i in xrange(y.shape[1])]
+                            for i in range(y.shape[1])]
 
     def predict(self, X):
         """
