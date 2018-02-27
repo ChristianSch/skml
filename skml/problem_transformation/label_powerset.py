@@ -28,9 +28,9 @@ class LabelPowerset(
 
         Parameters
         ----------
-        estimator : scikit-learn compatible classifier instance. Will be
-                     copied (with all hyperparameters) before use, hence will
-                     be left untouched.
+        estimator : scikit-learn compatible classifier instance
+            Will be copied (with all hyperparameters) before use,
+            hence original will be left untouched.
 
         Returns
         -------
@@ -47,9 +47,9 @@ class LabelPowerset(
         Parameters
         ----------
         X : (sparse) array-like, shape = [n_samples, n_features]
-            Data.
+            Data
         y : (sparse) array-like, shape = [n_samples, ], [n_samples, n_classes]
-            Multi-label targets.
+            Multi-label targets
         """
         # should the powersets that are not seen in the training data also be
         # used as a class?
@@ -85,7 +85,7 @@ class LabelPowerset(
         Parameters
         ----------
         X : (sparse) array-like, shape = [n_samples, n_features]
-            Data.
+            Data
 
         Returns
         -------

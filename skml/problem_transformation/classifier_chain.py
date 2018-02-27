@@ -25,7 +25,9 @@ class ClassifierChain(BaseEstimator, MetaEstimatorMixin, ClassifierMixin):
 
         Parameters
         ----------
-        classifier : The classifier used to build a chain of classifiers.
+        estimator : scikit-learn compatible classifier instance
+            The classifier used to build a chain of classifiers.
+            Will be copied, hence the original will be left untouched.
         """
         self.estimator = estimator
         self.estimators_ = []
@@ -61,6 +63,7 @@ class ClassifierChain(BaseEstimator, MetaEstimatorMixin, ClassifierMixin):
                 c.fit(stacked, y[:, i])
 
             self.estimators_.append(c)
+
 
     def predict(self, X):
         """

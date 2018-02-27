@@ -17,3 +17,10 @@ Currently Supported
     * Classifier Chains
 * Ensembles:
     * Ensemble Classifier Chain
+
+
+Python Supported
+----------------
+Due to dependencies we do not check for a working distribution of skml for the
+following Python versions:
+* 3.2

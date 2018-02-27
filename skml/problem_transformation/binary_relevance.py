@@ -9,7 +9,7 @@ class BinaryRelevance(
         BaseEstimator, MetaEstimatorMixin, ClassifierMixin):
     """Implements the binary relevance problem transformation strategy,
     where for each label a distinct binary classifier is trained to
-    classify whether the instance should be part of the class or not.
+    classify whether label should be assigned to an instance or not.
     """
     def __init__(self, estimator):
         """
@@ -18,17 +18,14 @@ class BinaryRelevance(
 
         Parameters
         ----------
-        classifier : scikit-learn compatible classifier instance. Will be
-                     copied (with all hyperparameters) before use, hence will
-                     be left untouched.
-        number_of_chains : Number of chains the ensemble shall train
-        threshold : Decision threshold to assign a label or not. Has to be
-                    between 0 and 1.
-        max_features : Number of features to draw from.
+        estimator :
+            scikit-learn compatible classifier instance. Will be
+            copied (with all hyperparameters) before use, hence
+            original will be left untouched.
 
         Returns
         -------
-        ensemble classifier chain instance
+        Binary relevance problem transformed MLC classifier
         """
         # get's cloned later on
         self.estimator = estimator
@@ -40,9 +37,9 @@ class BinaryRelevance(
         Parameters
         ----------
         X : (sparse) array-like, shape = [n_samples, n_features]
-            Data.
+            Data
         y : (sparse) array-like, shape = [n_samples, ], [n_samples, n_classes]
-            Multi-label targets.
+            Multi-label targets
         """
 
         validation.check_X_y(X, y, multi_output=True)
