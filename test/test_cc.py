@@ -25,12 +25,6 @@ class TestCC(Chai):
         y_pred = chain.predict(X)
         hamming_loss(y, y_pred)
 
-    def test_cc_fit_predict_proba(self):
-        chain = ClassifierChain(RandomForestClassifier())
-        chain.fit(X, y)
-
-        y_pred_proba = chain.predict_proba(X)
-
     def test_cc_pipeline(self):
         pl = Pipeline([("cc", ClassifierChain(RandomForestClassifier()))])
         pl.fit(X, y)

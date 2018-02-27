@@ -67,22 +67,3 @@ class BinaryRelevance(
         """
         validation.check_is_fitted(self, 'estimators_')
         return np.array([e.predict(X) for e in self.estimators_]).T
-
-    def predict_proba(self, X):
-        """
-        Predicts the label probabilites for the given instances. Note that
-        these probabilities might not be obtainable, depending on the used
-        classifiers. They also might have to be calibrated.
-
-        Parameters
-        ----------
-        X : (sparse) array-like, shape = [n_samples, n_features]
-            Data.
-
-        Returns
-        -------
-        array-like, shape = [n_samples, n_labels]
-            Estimated labels
-        """
-        validation.check_is_fitted(self, 'estimators_')
-        return np.array([e.predict_proba(X) for e in self.estimators_]).T

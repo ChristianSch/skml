@@ -87,33 +87,4 @@ class ClassifierChain(BaseEstimator, MetaEstimatorMixin, ClassifierMixin):
                 new_y = c.predict(stacked)
                 y_pred = np.hstack((y_pred, new_y.reshape(-1, 1)))
 
-        return (y_pred >= self.threshold).astype(int)
-
-    def predict_proba(self, X):
-        """
-        Predicts the label probabilites for the given instances. Note that
-        these probabilities might not be obtainable, depending on the used
-        classifiers. They also might have to be calibrated, in order to get
-        proper probabilities.
-
-        Parameters
-        ----------
-        X : (sparse) array-like, shape = [n_samples, n_features]
-            Data.
-
-        Returns
-        -------
-        array-like, shape = [n_samples, n_labels]
-            Estimated labels
-        """
-        validation.check_is_fitted(self, 'estimators_')
-
-        for i, c in enumerate(self.estimators_):
-            if i == 0:
-                y_pred = (c.predict_proba(X)[:, 1]).reshape(-1, 1)
-            else:
-                stacked = np.hstack((X, y_pred))
-                new_y = c.predict_proba(stacked)[:, 1]
-                y_pred = np.hstack((y_pred, new_y.reshape(-1, 1)))
-
         return y_pred

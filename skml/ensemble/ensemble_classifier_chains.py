@@ -91,28 +91,3 @@ class EnsembleClassifierChain(
         out = preds / W_norm
 
         return (out >= self.threshold).astype(int)
-
-    def predict_proba(self, X):
-        """
-        Predicts the label probabilites for the given instances. Note that
-        these probabilities might not be obtainable, depending on the used
-        classifiers. They also might have to be calibrated.
-
-        Parameters
-        ----------
-        X : (sparse) array-like, shape = [n_samples, n_features]
-            Data.
-
-        Returns
-        -------
-        array-like, shape = [n_samples, n_labels]
-            Estimated labels
-        """
-        validation.check_is_fitted(self, 'estimators_')
-
-        preds = np.array([cc.predict_proba(X) for cc in self.estimators_])
-        preds = np.sum(preds, axis=0)
-        W_norm = preds.mean(axis=0)
-        out = preds / W_norm
-
-        return out

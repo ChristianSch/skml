@@ -22,14 +22,6 @@ class TestECC(Chai):
         y_pred = ensemble.predict(X)
         hamming_loss(y, y_pred)
 
-    def test_ecc_fit_predict_proba(self):
-        ensemble = EnsembleClassifierChain(RandomForestClassifier(),
-                                           threshold=.6,
-                                           max_features=1.0)
-        ensemble.fit(X, y)
-
-        y_pred_proba = ensemble.predict_proba(X)
-
     def test_ecc_pipeline(self):
         pl = Pipeline([("cc",
                         EnsembleClassifierChain(RandomForestClassifier()))])

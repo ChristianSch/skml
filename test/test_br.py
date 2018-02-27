@@ -29,11 +29,6 @@ class TestBR(Chai):
         pl = Pipeline([("br", BinaryRelevance(RandomForestClassifier()))])
         pl.fit(X, y)
 
-    def test_br_fit_predict_proba(self):
-        clf = BinaryRelevance(RandomForestClassifier())
-        clf.fit(X, y)
-        y_pred_proba = clf.predict_proba(X)
-
     def test_br_gridsearch(self):
         br = BinaryRelevance(RandomForestClassifier())
         cv = GridSearchCV(br, {'estimator__n_estimators': [10, 20]})
