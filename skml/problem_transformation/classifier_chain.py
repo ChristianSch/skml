@@ -17,7 +17,7 @@ class ClassifierChain(BaseEstimator, MetaEstimatorMixin, ClassifierMixin):
     The n-th classifier predicts the n-th label given the feature vector,
     where the (n-1)-th labels are appended to.
     """
-    def __init__(self, estimator, threshold=.5):
+    def __init__(self, estimator):
         """Classifer Chain multi-label strategy
 
         Builds a new classifier chain using the given classifier, which is
@@ -29,7 +29,6 @@ class ClassifierChain(BaseEstimator, MetaEstimatorMixin, ClassifierMixin):
         """
         self.estimator = estimator
         self.estimators_ = []
-        self.threshold = threshold
 
     def fit(self, X, y):
         """Fit underlying estimators.

@@ -57,8 +57,7 @@ class EnsembleClassifierChain(
         for i in range(self.number_of_chains):
             # the classifier gets cloned internally in classifer chains, so
             # no need to do that here.
-            cc = ClassifierChain(self.estimator,
-                                 threshold=self.threshold)
+            cc = ClassifierChain(self.estimator)
 
             no_samples = y.shape[0]
 
