@@ -41,9 +41,8 @@ class ClassifierChain(BaseEstimator, MetaEstimatorMixin, ClassifierMixin):
         X : (sparse) array-like, shape = [n_samples, n_features]
             Data.
         y : (sparse) array-like, shape = [n_samples, ], [n_samples, n_classes]
-            Multi-label targets.
+            Multi-label targets encoded as binary vectors.
         """
-
         validation.check_X_y(X, y, multi_output=True)
         y = validation.check_array(y, accept_sparse=True)
         self.L = y.shape[1]
@@ -65,7 +64,6 @@ class ClassifierChain(BaseEstimator, MetaEstimatorMixin, ClassifierMixin):
                 c.fit(stacked, y[:, i])
 
             self.estimators_.append(c)
-
 
     def predict(self, X):
         """

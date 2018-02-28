@@ -30,16 +30,16 @@ class TestCC(Chai):
         pl.fit(X, y)
 
     def test_cc_gridsearch(self):
-        cc = ClassifierChain(RandomForestClassifier())
-        cv = GridSearchCV(cc, {'estimator__n_estimators': [10, 20]})
+        clf = ClassifierChain(RandomForestClassifier())
+        cv = GridSearchCV(clf, {'estimator__n_estimators': [10, 20]})
         cv.fit(X, y)
 
     def test_cc_always_present(self):
         # Test that cc works with classes that are always present or absent.
-        cc = ClassifierChain(RandomForestClassifier())
+        clf = ClassifierChain(RandomForestClassifier())
         X_2 = np.array([[2, 3], [4, 0]])
         y_2 = np.array([[1, 1], [1, 0]])
-        cc.fit(X, y)
+        clf.fit(X, y)
 
     def test_cc_predict_multi_instances(self):
         clf = ClassifierChain(RandomForestClassifier())
@@ -49,7 +49,6 @@ class TestCC(Chai):
         assert y_pred.shape[0] == y.shape[0]
 
     def test_cc_fit_predict_sparse(self):
-        # test fit/predict of sparse matrices
         # test fit/predict of sparse matrices
         for sparse in [sp.csr_matrix, sp.csc_matrix, sp.coo_matrix,
                        sp.dok_matrix, sp.lil_matrix]:
