@@ -21,13 +21,16 @@ class EnsembleClassifierChain(
 
         Parameters
         ----------
-        classifier : scikit-learn compatible classifier instance. Will be
-                     copied (with all hyperparameters) before use, hence will
-                     be left untouched.
-        number_of_chains : Number of chains the ensemble shall train
-        threshold : Decision threshold to assign a label or not. Has to be
-                    between 0 and 1.
-        max_features : Number of features to draw from.
+        estimator : scikit-learn compatible classifier instance.
+            Will be copied (with all hyperparameters) before use,
+            hence will be left untouched.
+        number_of_chains : number, default = 10
+            Number of chains the ensemble shall train
+        threshold : number in [0,1], default = 0.5
+            Decision threshold to assign a label or not. Has to be
+            between 0 and 1.
+        max_features : number in [0, 1], default = 1.0
+            Fractions of features to use at once.
 
         Returns
         -------
