@@ -46,7 +46,7 @@ class TestECC(Chai):
         clf.fit(X, y)
 
         y_pred = clf.predict(X)
-        assert y_pred.shape[0] == y.shape[0]
+        assert_true(y_pred.shape[0] == y.shape[0])
 
     def test_ecc_fit_predict_sparse(self):
         # test fit/predict of sparse matrices

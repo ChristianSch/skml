@@ -2,12 +2,6 @@ from chai import Chai
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
-from sklearn.utils.testing import assert_array_equal
-from sklearn.utils.testing import assert_equal
-from sklearn.utils.testing import assert_almost_equal
-from sklearn.utils.testing import assert_true
-from sklearn.utils.testing import assert_false
-from sklearn.utils.testing import assert_greater
 from sklearn.metrics import hamming_loss
 import numpy as np
 import scipy.sparse as sp
@@ -48,7 +42,7 @@ class TestBR(Chai):
         clf.fit(X, y)
 
         y_pred = clf.predict(X)
-        assert y_pred.shape[0] == y.shape[0]
+        assert_true(y_pred.shape[0] == y.shape[0])
 
     def test_br_fit_predict_sparse(self):
         # test fit/predict of sparse matrices
