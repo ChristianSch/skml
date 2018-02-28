@@ -6,10 +6,10 @@ def load_dataset(name):
     """
     Loads a multi-label classification dataset.
 
-    Parameter
-    ---------
-    name : "yeast"
-        Name of the dataset.
+    Parameters
+    ----------
+    name : string
+        Name of the dataset. Currently only 'yeast' is available.
     """
     if name == 'yeast':
         data = fetch_mldata('yeast')

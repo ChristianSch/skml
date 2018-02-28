@@ -11,8 +11,8 @@ Note that skml is in an early stage, and if you observe any unexpected behavior
 or have questions, please create an
 `issue <https://github.com/christiansch/skml/issues>`_.
 
-Please refer to the :ref:`user_guide` for an overview or background information.
-The :ref:`auto_examples/index` section holds simple examples to common problems.
+Please refer to the :doc:`user_guide` for an overview or background information.
+The :doc:`auto_examples/index` section holds simple examples to common problems.
 
 
     .. toctree::

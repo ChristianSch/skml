@@ -1,8 +1,8 @@
 .. _datasets:
 
-====================
-Multi-label Datasets
-====================
+=====================
+Multi-label Data Sets
+=====================
 
 .. currentmodule:: skml.datasets
 
