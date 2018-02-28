@@ -41,6 +41,13 @@ class TestCC(Chai):
         y_2 = np.array([[1, 1], [1, 0]])
         cc.fit(X, y)
 
+    def test_cc_predict_multi_instances(self):
+        clf = ClassifierChain(RandomForestClassifier())
+        clf.fit(X, y)
+
+        y_pred = clf.predict(X)
+        assert y_pred.shape[0] == y.shape[0]
+
     def test_cc_fit_predict_sparse(self):
         # test fit/predict of sparse matrices
         # test fit/predict of sparse matrices

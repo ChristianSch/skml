@@ -41,6 +41,13 @@ class TestBR(Chai):
         y_2 = np.array([[1, 1], [1, 0]])
         clf.fit(X, y)
 
+    def test_br_predict_multi_instances(self):
+        clf = BinaryRelevance(RandomForestClassifier())
+        clf.fit(X, y)
+
+        y_pred = clf.predict(X)
+        assert y_pred.shape[0] == y.shape[0]
+
     def test_br_fit_predict_sparse(self):
         # test fit/predict of sparse matrices
         for sparse in [sp.csr_matrix, sp.csc_matrix, sp.coo_matrix,
