@@ -29,7 +29,9 @@ class TestECC(Chai):
 
     def test_ecc_gridsearch(self):
         ecc = EnsembleClassifierChain(RandomForestClassifier())
-        cv = GridSearchCV(ecc, {'estimator__n_estimators': [10, 20]})
+        cv = GridSearchCV(ecc,
+                          {'estimator__n_estimators': [10, 20]},
+                          n_jobs=-1)
         cv.fit(X, y)
 
     def test_ecc_always_present(self):

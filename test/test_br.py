@@ -31,7 +31,9 @@ class TestBR(Chai):
 
     def test_br_gridsearch(self):
         br = BinaryRelevance(RandomForestClassifier())
-        cv = GridSearchCV(br, {'estimator__n_estimators': [10, 20]})
+        cv = GridSearchCV(br,
+                          {'estimator__n_estimators': [10, 20]},
+                          n_jobs=-1)
         cv.fit(X, y)
 
     def test_br_always_present(self):

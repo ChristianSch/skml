@@ -31,7 +31,9 @@ class TestCC(Chai):
 
     def test_cc_gridsearch(self):
         clf = ClassifierChain(RandomForestClassifier())
-        cv = GridSearchCV(clf, {'estimator__n_estimators': [10, 20]})
+        cv = GridSearchCV(clf,
+                          {'estimator__n_estimators': [10, 20]},
+                          n_jobs=-1)
         cv.fit(X, y)
 
     def test_cc_always_present(self):

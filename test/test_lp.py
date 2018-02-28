@@ -31,7 +31,9 @@ class TestLP(Chai):
 
     def test_lp_gridsearch(self):
         lp = LabelPowerset(RandomForestClassifier())
-        cv = GridSearchCV(lp, {'estimator__n_estimators': [10, 20]})
+        cv = GridSearchCV(lp,
+                          {'estimator__n_estimators': [10, 20]},
+                          n_jobs=-1)
         cv.fit(X, y)
 
     def test_lp_always_present(self):
