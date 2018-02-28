@@ -31,6 +31,7 @@ class ClassifierChain(BaseEstimator, MetaEstimatorMixin, ClassifierMixin):
         """
         self.estimator = estimator
         self.estimators_ = []
+        self.L = 0
 
     def fit(self, X, y):
         """Fit underlying estimators.
@@ -45,8 +46,9 @@ class ClassifierChain(BaseEstimator, MetaEstimatorMixin, ClassifierMixin):
 
         validation.check_X_y(X, y, multi_output=True)
         y = validation.check_array(y, accept_sparse=True)
+        self.L = y.shape[1]
 
-        for i in range(y.shape[1]):
+        for i in range(self.L):
             c = clone(self.estimator)
 
             # at this point, all classifiers in the chain from the nodes before
