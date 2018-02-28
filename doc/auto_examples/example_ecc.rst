@@ -19,6 +19,7 @@ An example of :class:`skml.ensemble.EnsembleClassifierChain`
     from sklearn.metrics import f1_score
     from sklearn.metrics import precision_score
     from sklearn.metrics import recall_score
+    from sklearn.model_selection import train_test_split
     from sklearn.ensemble import RandomForestClassifier
     import numpy as np
 
@@ -27,9 +28,9 @@ An example of :class:`skml.ensemble.EnsembleClassifierChain`
     from skml.datasets import load_dataset
 
     X, y = load_dataset('yeast')
-    ensemble = EnsembleClassifierChain(RandomForestClassifier(),
-                                       threshold=.5,
-                                       max_features=1.0)
+    X_train, X_test, y_train, y_test = train_test_split(X, y)
+
+    ensemble = EnsembleClassifierChain(RandomForestClassifier())
     ensemble.fit(X, y)
     y_pred = ensemble.predict(X)
 

@@ -28,7 +28,7 @@ An example of :class:`skml.problem_transformation.ClassifierChain`
     from skml.datasets import load_dataset
 
     X, y = load_dataset('yeast')
-    X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y)
+    X_train, X_test, y_train, y_test = train_test_split(X, y)
 
     cc = ClassifierChain(LogisticRegression())
     cc.fit(X_train, y_train)

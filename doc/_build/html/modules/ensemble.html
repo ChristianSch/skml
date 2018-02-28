@@ -210,17 +210,24 @@ of the training data (with replacement, also known as bagging).</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>classifier</strong> : scikit-learn compatible classifier instance. Will be</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>estimator</strong> : scikit-learn compatible classifier instance.</p>
 <blockquote>
-<div><p>copied (with all hyperparameters) before use, hence will
-be left untouched.</p>
+<div><p>Will be copied (with all hyperparameters) before use,
+hence will be left untouched.</p>
 </div></blockquote>
-<p><strong>number_of_chains</strong> : Number of chains the ensemble shall train</p>
-<p><strong>threshold</strong> : Decision threshold to assign a label or not. Has to be</p>
+<p><strong>number_of_chains</strong> : number, default = 10</p>
 <blockquote>
-<div><p>between 0 and 1.</p>
+<div><p>Number of chains the ensemble shall train</p>
 </div></blockquote>
-<p><strong>max_features</strong> : Number of features to draw from.</p>
+<p><strong>threshold</strong> : number in [0,1], default = 0.5</p>
+<blockquote>
+<div><p>Decision threshold to assign a label or not. Has to be
+between 0 and 1.</p>
+</div></blockquote>
+<p><strong>max_features</strong> : number in [0, 1], default = 1.0</p>
+<blockquote>
+<div><p>Fractions of features to use at once.</p>
+</div></blockquote>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">ensemble classifier chain instance</p>

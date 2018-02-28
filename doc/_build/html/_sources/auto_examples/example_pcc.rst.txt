@@ -32,7 +32,7 @@ An example of :class:`skml.problem_transformation.ProbabilisticClassifierChain`
     # you shouldn't do this on your own data though!
     y = y[:, :6]
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y)
+    X_train, X_test, y_train, y_test = train_test_split(X, y)
 
     pcc = ProbabilisticClassifierChain(LogisticRegression())
     pcc.fit(X_train, y_train)

@@ -182,13 +182,16 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        classifier : scikit-learn compatible classifier instance. Will be</span>
-<span class="sd">                     copied (with all hyperparameters) before use, hence will</span>
-<span class="sd">                     be left untouched.</span>
-<span class="sd">        number_of_chains : Number of chains the ensemble shall train</span>
-<span class="sd">        threshold : Decision threshold to assign a label or not. Has to be</span>
-<span class="sd">                    between 0 and 1.</span>
-<span class="sd">        max_features : Number of features to draw from.</span>
+<span class="sd">        estimator : scikit-learn compatible classifier instance.</span>
+<span class="sd">            Will be copied (with all hyperparameters) before use,</span>
+<span class="sd">            hence will be left untouched.</span>
+<span class="sd">        number_of_chains : number, default = 10</span>
+<span class="sd">            Number of chains the ensemble shall train</span>
+<span class="sd">        threshold : number in [0,1], default = 0.5</span>
+<span class="sd">            Decision threshold to assign a label or not. Has to be</span>
+<span class="sd">            between 0 and 1.</span>
+<span class="sd">        max_features : number in [0, 1], default = 1.0</span>
+<span class="sd">            Fractions of features to use at once.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
