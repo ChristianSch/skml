@@ -24,29 +24,27 @@ ensemble = EnsembleClassifierChain(RandomForestClassifier(),
                                    max_features=1.0)
 ensemble.fit(X, y)
 y_pred = ensemble.predict(X)
-print y.shape
-print y_pred.shape
 
-print "hamming loss: "
-print hamming_loss(y, y_pred)
+print("hamming loss: ")
+print(hamming_loss(y, y_pred))
 
-print "accuracy:"
-print accuracy_score(y, y_pred)
+print("accuracy:")
+print(accuracy_score(y, y_pred))
 
-print "f1 score:"
-print "micro"
-print f1_score(y, y_pred, average='micro')
-print "macro"
-print f1_score(y, y_pred, average='macro')
+print("f1 score:")
+print("micro")
+print(f1_score(y, y_pred, average='micro'))
+print("macro")
+print(f1_score(y, y_pred, average='macro'))
 
-print "precision:"
-print "micro"
-print precision_score(y, y_pred, average='micro')
-print "macro"
-print precision_score(y, y_pred, average='macro')
+print("precision:")
+print("micro")
+print(precision_score(y, y_pred, average='micro'))
+print("macro")
+print(precision_score(y, y_pred, average='macro'))
 
-print "recall:"
-print "micro"
-print recall_score(y, y_pred, average='micro')
-print "macro"
-print recall_score(y, y_pred, average='macro')
+print("recall:")
+print("micro")
+print(recall_score(y, y_pred, average='micro'))
+print("macro")
+print(recall_score(y, y_pred, average='macro'))

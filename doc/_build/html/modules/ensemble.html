@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -36,9 +38,7 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="skml 0.1.0b documentation" href="../index.html"/>
-        <link rel="up" title="API Documentation" href="../api.html"/>
-        <link rel="next" title="Multi-label Classification Examples" href="../auto_examples/index.html"/>
-        <link rel="prev" title="Problem Transformation Methods" href="problem_transformation.html"/> 
+        <link rel="up" title="API Documentation" href="../api.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -47,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -87,10 +88,15 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="problem_transformation.html">Problem Transformation Methods</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Ensemble Methods</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Ensemble Methods</a><ul class="simple">
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../auto_examples/index.html">Multi-label Classification Examples</a></li>
@@ -107,8 +113,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">skml</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">skml</a>
+        
       </nav>
 
 
@@ -117,25 +125,42 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../api.html">API Documentation</a> &raquo;</li>
-      
-    <li>Ensemble Methods</li>
+        
+      <li>Ensemble Methods</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="../_sources/modules/ensemble.txt" rel="nofollow"> View page source</a>
+            
+            <a href="../_sources/modules/ensemble.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -152,6 +177,29 @@ works as an error correction to the other classifiers.</p>
 <dt id="skml.ensemble.EnsembleClassifierChain">
 <em class="property">class </em><code class="descclassname">skml.ensemble.</code><code class="descname">EnsembleClassifierChain</code><span class="sig-paren">(</span><em>estimator</em>, <em>number_of_chains=10</em>, <em>threshold=0.5</em>, <em>max_features=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/skml/ensemble/ensemble_classifier_chains.html#EnsembleClassifierChain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skml.ensemble.EnsembleClassifierChain" title="Permalink to this definition">¶</a></dt>
 <dd><p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#skml.ensemble.EnsembleClassifierChain.fit" title="skml.ensemble.EnsembleClassifierChain.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a>(X,&nbsp;y)</td>
+<td>Fit underlying estimators.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</td>
+<td>Get parameters for this estimator.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#skml.ensemble.EnsembleClassifierChain.predict" title="skml.ensemble.EnsembleClassifierChain.predict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code></a>(X)</td>
+<td>Predicts the labels for the given instances.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">score</span></code>(X,&nbsp;y[,&nbsp;sample_weight])</td>
+<td>Returns the mean accuracy on the given test data and labels.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</td>
+<td>Set the parameters of this estimator.</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="skml.ensemble.EnsembleClassifierChain.__init__">
 <code class="descname">__init__</code><span class="sig-paren">(</span><em>estimator</em>, <em>number_of_chains=10</em>, <em>threshold=0.5</em>, <em>max_features=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/skml/ensemble/ensemble_classifier_chains.html#EnsembleClassifierChain.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skml.ensemble.EnsembleClassifierChain.__init__" title="Permalink to this definition">¶</a></dt>
@@ -228,49 +276,17 @@ be left untouched.</p>
 </table>
 </dd></dl>
 
-<dl class="method">
-<dt id="skml.ensemble.EnsembleClassifierChain.predict_proba">
-<code class="descname">predict_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/skml/ensemble/ensemble_classifier_chains.html#EnsembleClassifierChain.predict_proba"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skml.ensemble.EnsembleClassifierChain.predict_proba" title="Permalink to this definition">¶</a></dt>
-<dd><p>Predicts the label probabilites for the given instances. Note that
-these probabilities might not be obtainable, depending on the used
-classifiers. They also might have to be calibrated.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : (sparse) array-like, shape = [n_samples, n_features]</p>
-<blockquote>
-<div><p>Data.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">array-like, shape = [n_samples, n_labels]</p>
-<blockquote class="last">
-<div><p>Estimated labels</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 </dd></dl>
 
 </div>
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../auto_examples/index.html" class="btn btn-neutral float-right" title="Multi-label Classification Examples" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="problem_transformation.html" class="btn btn-neutral" title="Problem Transformation Methods" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
@@ -302,7 +318,8 @@ classifiers. They also might have to be calibrated.</p>
             VERSION:'0.1.0b',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>

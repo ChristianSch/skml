@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -37,8 +39,8 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="skml 0.1.0b documentation" href="../index.html"/>
         <link rel="up" title="Multi-label Classification Examples" href="index.html"/>
-        <link rel="next" title="Classifier Chain Example" href="example_cc.html"/>
-        <link rel="prev" title="Ensemble Binary Relevance Example" href="example_br.html"/> 
+        <link rel="next" title="Ensemble Label Powerset Example" href="example_lp.html"/>
+        <link rel="prev" title="Multi-label Classification Examples" href="index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -47,6 +49,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -87,13 +90,17 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Multi-label Classification Examples</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="example_lp.html">Ensemble Label Powerset Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="example_br.html">Ensemble Binary Relevance Example</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Ensemble Classifier Chain Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_lp.html">Ensemble Label Powerset Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="example_cc.html">Classifier Chain Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_br.html">Ensemble Binary Relevance Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_pcc.html">Probabilistic Classifier Chain Example</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../user_guide.html">User Guide</a></li>
@@ -109,8 +116,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">skml</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">skml</a>
+        
       </nav>
 
 
@@ -119,25 +128,42 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="index.html">Multi-label Classification Examples</a> &raquo;</li>
-      
-    <li>Ensemble Classifier Chain Example</li>
+        
+      <li>Ensemble Classifier Chain Example</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="../_sources/auto_examples/example_ecc.txt" rel="nofollow"> View page source</a>
+            
+            <a href="../_sources/auto_examples/example_ecc.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -145,8 +171,8 @@
             
   <div class="section" id="ensemble-classifier-chain-example">
 <span id="sphx-glr-auto-examples-example-ecc-py"></span><h1>Ensemble Classifier Chain Example<a class="headerlink" href="#ensemble-classifier-chain-example" title="Permalink to this headline">¶</a></h1>
-<p>An example of <a class="reference internal" href="../modules/ensemble.html#skml.ensemble.EnsembleClassifierChain" title="skml.ensemble.EnsembleClassifierChain"><code class="xref py py-class docutils literal"><span class="pre">skml.ensemble.EnsembleClassifierChain</span></code></a></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">hamming_loss</span>
+<p>An example of <a class="reference internal" href="../modules/ensemble.html#skml.ensemble.EnsembleClassifierChain" title="skml.ensemble.EnsembleClassifierChain"><code class="xref py py-class docutils literal notranslate"><span class="pre">skml.ensemble.EnsembleClassifierChain</span></code></a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">hamming_loss</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">f1_score</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">precision_score</span>
@@ -164,53 +190,56 @@
                                    <span class="n">max_features</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 <span class="n">ensemble</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span>
-<span class="k">print</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">shape</span>
 
-<span class="k">print</span> <span class="s2">&quot;hamming loss: &quot;</span>
-<span class="k">print</span> <span class="n">hamming_loss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;hamming loss: &quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hamming_loss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
 
-<span class="k">print</span> <span class="s2">&quot;accuracy:&quot;</span>
-<span class="k">print</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;accuracy:&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
 
-<span class="k">print</span> <span class="s2">&quot;f1 score:&quot;</span>
-<span class="k">print</span> <span class="s2">&quot;micro&quot;</span>
-<span class="k">print</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;micro&#39;</span><span class="p">)</span>
-<span class="k">print</span> <span class="s2">&quot;macro&quot;</span>
-<span class="k">print</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;macro&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;f1 score:&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;micro&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f1_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;micro&#39;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;macro&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f1_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;macro&#39;</span><span class="p">))</span>
 
-<span class="k">print</span> <span class="s2">&quot;precision:&quot;</span>
-<span class="k">print</span> <span class="s2">&quot;micro&quot;</span>
-<span class="k">print</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;micro&#39;</span><span class="p">)</span>
-<span class="k">print</span> <span class="s2">&quot;macro&quot;</span>
-<span class="k">print</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;macro&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;precision:&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;micro&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;micro&#39;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;macro&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;macro&#39;</span><span class="p">))</span>
 
-<span class="k">print</span> <span class="s2">&quot;recall:&quot;</span>
-<span class="k">print</span> <span class="s2">&quot;micro&quot;</span>
-<span class="k">print</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;micro&#39;</span><span class="p">)</span>
-<span class="k">print</span> <span class="s2">&quot;macro&quot;</span>
-<span class="k">print</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;macro&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;recall:&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;micro&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;micro&#39;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;macro&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;macro&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
-<div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/example_ecc.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">example_ecc.py</span></code></a></div>
-<div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/example_ecc.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">example_ecc.ipynb</span></code></a></div>
-<p class="sphx-glr-signature"><a class="reference external" href="http://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+<div class="sphx-glr-footer docutils container">
+<div class="sphx-glr-download docutils container">
+<a class="reference download internal" href="../_downloads/example_ecc.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">example_ecc.py</span></code></a></div>
+<div class="sphx-glr-download docutils container">
+<a class="reference download internal" href="../_downloads/example_ecc.ipynb" download=""><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">example_ecc.ipynb</span></code></a></div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Gallery generated by Sphinx-Gallery</a></p>
 </div>
 
 
+           </div>
+           <div class="articleComments">
+            
            </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="example_cc.html" class="btn btn-neutral float-right" title="Classifier Chain Example" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="example_lp.html" class="btn btn-neutral float-right" title="Ensemble Label Powerset Example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="example_br.html" class="btn btn-neutral" title="Ensemble Binary Relevance Example" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="Multi-label Classification Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -244,7 +273,8 @@
             VERSION:'0.1.0b',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>

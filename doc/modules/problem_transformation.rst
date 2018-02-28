@@ -21,3 +21,8 @@ classification.
   :members:
 
   .. automethod:: __init__
+
+.. autoclass:: skml.problem_transformation.ProbabilisticClassifierChain
+  :members:
+
+  .. automethod:: __init__

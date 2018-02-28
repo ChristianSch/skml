@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>skml.problem_transformation.probabilistic_classifier_chain &mdash; skml 0.1.0b documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="skml 0.1.0b documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> skml
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Multi-label Classification Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_guide.html">User Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">skml</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>skml.problem_transformation.probabilistic_classifier_chain</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for skml.problem_transformation.probabilistic_classifier_chain</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="k">import</span> <span class="n">clone</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="k">import</span> <span class="n">validation</span>
+<span class="kn">from</span> <span class="nn">.classifier_chain</span> <span class="k">import</span> <span class="n">ClassifierChain</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<div class="viewcode-block" id="ProbabilisticClassifierChain"><a class="viewcode-back" href="../../../modules/problem_transformation.html#skml.problem_transformation.ProbabilisticClassifierChain">[docs]</a><span class="k">class</span> <span class="nc">ProbabilisticClassifierChain</span><span class="p">(</span><span class="n">ClassifierChain</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Learns a chain of classifiers. If the input data is given as</span>
+<span class="sd">    :math:`\mathbf{x}\in\mathcal{X}`, and the target data as a set</span>
+<span class="sd">    :math:`\lambda =\{\lambda_1,\cdots,\lambda_m\}`, then</span>
+<span class="sd">    :math:`|\mathcal{L}|`</span>
+<span class="sd">    classifiers are learned as follows:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        f_i: \mathcal{X} \\times \{0,1\}^{i-1} \\rightarrow [0,1]</span>
+
+<span class="sd">        (\mathbf{x},y_1,\cdots,y_{i-1})\mapsto</span>
+<span class="sd">        \mathbf{P}(y_i=1|\mathbf{x},y_1,\cdots,y_{i=1})</span>
+
+<span class="sd">    So each classifier :math:`f_i` is trained on an augmented input</span>
+<span class="sd">    space :math:`\mathcal{X} \\times\{0,1\}^{i-1}`. NB: it is implied</span>
+<span class="sd">    that the classifier predicts the probability of :math:`y_i=1`,</span>
+<span class="sd">    so it has to support `predict_proba(X)`.</span>
+
+<span class="sd">    The inference of the most probable label set is then determined</span>
+<span class="sd">    via:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \mathbf{h}^* = \\arg \max_{y\in\mathcal{Y}}</span>
+<span class="sd">        \mathbf{P}_\mathbf{x}(\mathbf{y})</span>
+
+<span class="sd">    where :math:`\mathbf{P}_\mathbf{x}(\mathbf{y})` is given as:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        P_\mathbf{x}(y) = P_\mathbf{x}(y_1)\cdot</span>
+<span class="sd">        \prod^m_{i=2}P_\mathbf{x}(y_i|y_1,\cdots,y_{i-1})</span>
+
+<span class="sd">        = P(\mathbf{y}|\mathbf{x}) = P(y_1|\mathbf{x})\cdot</span>
+<span class="sd">        \prod^m_{i=2}P(y_i|\mathbf{x},y_1,\cdots,y_{i-1})</span>
+
+<span class="sd">        ⁼ P(\mathbf{y}|\mathbf{x}) = f_1(\mathbf{x})</span>
+
+<span class="sd">    For each label combination in :math:`2^{|\mathcal{L}|}`</span>
+<span class="sd">    a posterior probability estimate has to be calculated,</span>
+<span class="sd">    so the original paper [3] notes feasibility for settings with</span>
+<span class="sd">    a label space bounded by :math:`|\mathcal{L}| \leq 15`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ProbabilisticClassifierChain.__init__"><a class="viewcode-back" href="../../../modules/problem_transformation.html#skml.problem_transformation.ProbabilisticClassifierChain.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">estimator</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Probabilistic Classifer Chain multi-label strategy</span>
+
+<span class="sd">        Builds a new probabilistic classifier chain using the given</span>
+<span class="sd">        classifier, which is copied :math:`|\mathcal{L}|` times</span>
+<span class="sd">        (L is the set of labels).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        estimator : scikit-learn compatible classifier instance</span>
+<span class="sd">            The classifier used to build a chain of classifiers.</span>
+<span class="sd">            Will be copied, hence the original will be left untouched.</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">estimator</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ProbabilisticClassifierChain.predict"><a class="viewcode-back" href="../../../modules/problem_transformation.html#skml.problem_transformation.ProbabilisticClassifierChain.predict">[docs]</a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Predicts the labels for the given instances.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : (sparse) array-like, shape = [n_samples, n_features]</span>
+<span class="sd">            Data.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        array-like, shape = [n_samples, n_labels]</span>
+<span class="sd">            Estimated labels</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">validation</span><span class="o">.</span><span class="n">check_is_fitted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;estimators_&#39;</span><span class="p">)</span>
+
+        <span class="n">Y</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">N_instances</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_instances</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">y_out</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">p_max</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">):</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">))</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">binary_repr</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">))))</span>
+
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">estimators_</span><span class="p">):</span>
+                    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                    NB: &quot;predict_proba&quot; returns two probabilities [p_0, p_1]:</span>
+<span class="sd">                        * p_0: the probability that y_i = 0</span>
+<span class="sd">                        * p_1: the probability that y_i = 1</span>
+
+<span class="sd">                        So if y_i = 1, we take p_1, if y_i = 0, we take</span>
+<span class="sd">                        p_0 as the probability estimate. As we&#39;re</span>
+<span class="sd">                        interested in the probability given a label vector,</span>
+<span class="sd">                        we have to select the probability of the value</span>
+<span class="sd">                        of the respective y_i for all i = 1..|L|.</span>
+<span class="sd">                    &quot;&quot;&quot;</span>
+                    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">stacked</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)))</span> \
+                            <span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                        <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">stacked</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+
+                <span class="n">pp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">pp</span> <span class="o">&gt;</span> <span class="n">p_max</span><span class="p">:</span>
+                    <span class="n">y_out</span> <span class="o">=</span> <span class="n">y</span>
+                    <span class="n">p_max</span> <span class="o">=</span> <span class="n">pp</span>
+
+            <span class="n">Y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_out</span><span class="p">)</span>
+</div></div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Christian Schulze.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.1.0b',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

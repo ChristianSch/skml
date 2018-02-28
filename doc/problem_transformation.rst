@@ -25,7 +25,7 @@ Note, that binary relevance is not capable of modeling label interdependence.
 
     .. [1] “Multi-Label Classification: An Overview.”
             Tsoumakas, Grigorios and Ioannis Katakis. in IJDWM 3 (2007): 1-13.
-    
+
 Label Powerset
 ==============
 Label Powerset (:mod:`skml.problem_transformation.LabelPowerset`) transforms
@@ -67,3 +67,34 @@ the classifiers in the chain.
             In Proceedings of European conference on Machine Learning and
             Knowledge Discovery in Databases 2009 (ECML PKDD 2009), Part II,
             LNAI 5782(pp. 254-269). Berlin: Springer.
+
+Probabilistic Classifier Chains
+===============================
+Probabilistic Classifier Chains
+(:mod:`skml.problem_transformation.ProbabilisticClassifierChain`)
+--also known as PCC--
+are an extension to the classic Classifier Chains
+(:mod:`skml.problem_transformation.ClassifierChain`)
+and can be seen as a discrete greedy approximation of probabilistic classifier chains
+with probabilities valued zero/one [3].
+
+For each label a classifier is trained as in CC, however probabilistic classifiers
+are used. In fact [3], when used with non-probabilistic classifiers, CC is recovered
+from the posterior probability distribution :math:`\mathbf{P}_\mathbf{y}(\mathbf{x})`.
+
+Note, that PCC performs best, when a loss function that models label
+interdendence (such as Subset 0/1 loss) is used, and the labels in the
+data set are in fact interdependent. For more information on this,
+see [3].
+
+The training is equivalent to CC, the inference (prediction) however is
+more complex. For a detailed description of the inference, see
+:mod:`skml.problem_transformation.ProbabilisticClassifierChains` directly,
+have a look at the source code, or refer to the paper [3].
+
+
+.. topic:: References:
+
+    .. [3] "Bayes Optimal Multilabel Classification via Probabilistic Classifier Chains",
+           K. Dembczynski, W. Cheng, E. Hüllermeier (2010). ICML 2010
+

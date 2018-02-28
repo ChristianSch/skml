@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -47,6 +49,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -87,7 +90,10 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Multi-label Classification Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="user_guide.html">User Guide</a><ul class="current">
@@ -96,6 +102,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#binary-relevance">Binary Relevance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#label-powerset">Label Powerset</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#classifier-chains">Classifier Chains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#probabilistic-classifier-chains">Probabilistic Classifier Chains</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ensemble.html">Ensemble Methods</a></li>
@@ -113,8 +120,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">skml</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">skml</a>
+        
       </nav>
 
 
@@ -123,25 +132,42 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
           <li><a href="user_guide.html">User Guide</a> &raquo;</li>
-      
-    <li>Problem Transformation</li>
+        
+      <li>Problem Transformation</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="_sources/problem_transformation.txt" rel="nofollow"> View page source</a>
+            
+            <a href="_sources/problem_transformation.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -149,12 +175,12 @@
             
   <div class="section" id="problem-transformation">
 <span id="id1"></span><h1>Problem Transformation<a class="headerlink" href="#problem-transformation" title="Permalink to this headline">¶</a></h1>
-<p>The <code class="xref py py-mod docutils literal"><span class="pre">skml.problem_transformation</span></code> module implements so called
+<p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">skml.problem_transformation</span></code> module implements so called
 <em>meta-estimators</em> to solve multi-label classification problems by transforming
 them into a number of easier problems, i.e. binary classification problems.</p>
 <div class="section" id="binary-relevance">
 <h2>Binary Relevance<a class="headerlink" href="#binary-relevance" title="Permalink to this headline">¶</a></h2>
-<p>Binary Relevance (<a class="reference internal" href="modules/problem_transformation.html#skml.problem_transformation.BinaryRelevance" title="skml.problem_transformation.BinaryRelevance"><code class="xref py py-mod docutils literal"><span class="pre">skml.problem_transformation.BinaryRelevance</span></code></a>)
+<p>Binary Relevance (<a class="reference internal" href="modules/problem_transformation.html#skml.problem_transformation.BinaryRelevance" title="skml.problem_transformation.BinaryRelevance"><code class="xref py py-mod docutils literal notranslate"><span class="pre">skml.problem_transformation.BinaryRelevance</span></code></a>)
 transforms a problem of multi-classification with <img class="math" src="_images/math/65dd185e01cea71ae44ec421281a77a697a972d0.png" alt="|\mathcal{L}|"/> labels
 into a problem of <img class="math" src="_images/math/65dd185e01cea71ae44ec421281a77a697a972d0.png" alt="|\mathcal{L}|"/> binary classification problems, hence
 trains <img class="math" src="_images/math/65dd185e01cea71ae44ec421281a77a697a972d0.png" alt="|\mathcal{L}|"/> classifiers that decide label-wise, if the example
@@ -174,7 +200,7 @@ Tsoumakas, Grigorios and Ioannis Katakis. in IJDWM 3 (2007): 1-13.</td></tr>
 </div>
 <div class="section" id="label-powerset">
 <h2>Label Powerset<a class="headerlink" href="#label-powerset" title="Permalink to this headline">¶</a></h2>
-<p>Label Powerset (<a class="reference internal" href="modules/problem_transformation.html#skml.problem_transformation.LabelPowerset" title="skml.problem_transformation.LabelPowerset"><code class="xref py py-mod docutils literal"><span class="pre">skml.problem_transformation.LabelPowerset</span></code></a>) transforms
+<p>Label Powerset (<a class="reference internal" href="modules/problem_transformation.html#skml.problem_transformation.LabelPowerset" title="skml.problem_transformation.LabelPowerset"><code class="xref py py-mod docutils literal notranslate"><span class="pre">skml.problem_transformation.LabelPowerset</span></code></a>) transforms
 a multi-class classification problem into one multi-class problem, where all
 possible label combinations are used as classes. So each possible combination
 of labels is turned into one class. If the underlying multi-label problem
@@ -198,9 +224,9 @@ Tsoumakas, Grigorios and Ioannis Katakis. in IJDWM 3 (2007): 1-13.</td></tr>
 </div>
 <div class="section" id="classifier-chains">
 <h2>Classifier Chains<a class="headerlink" href="#classifier-chains" title="Permalink to this headline">¶</a></h2>
-<p>Classifier chains (<a class="reference internal" href="modules/problem_transformation.html#skml.problem_transformation.ClassifierChain" title="skml.problem_transformation.ClassifierChain"><code class="xref py py-mod docutils literal"><span class="pre">skml.problem_transformation.ClassifierChain</span></code></a>)
+<p>Classifier chains (<a class="reference internal" href="modules/problem_transformation.html#skml.problem_transformation.ClassifierChain" title="skml.problem_transformation.ClassifierChain"><code class="xref py py-mod docutils literal notranslate"><span class="pre">skml.problem_transformation.ClassifierChain</span></code></a>)
 improve the binary relevance
-(<a class="reference internal" href="modules/problem_transformation.html#skml.problem_transformation.BinaryRelevance" title="skml.problem_transformation.BinaryRelevance"><code class="xref py py-mod docutils literal"><span class="pre">skml.problem_transformation.BinaryRelevance</span></code></a>) method to use label
+(<a class="reference internal" href="modules/problem_transformation.html#skml.problem_transformation.BinaryRelevance" title="skml.problem_transformation.BinaryRelevance"><code class="xref py py-mod docutils literal notranslate"><span class="pre">skml.problem_transformation.BinaryRelevance</span></code></a>) method to use label
 interdependence as well. For each label a classifier is trained. Besides the
 first classifier in the chain, each subsequent classifier is trained on a
 modified input vector, where the previous predicted labels are incorporated.
@@ -213,7 +239,7 @@ the classifiers in the chain.</p>
 <table class="docutils footnote" frame="void" id="id4" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[2]</td><td>&#8220;Classifier chains for multi-label classification&#8221;,
+<tr><td class="label">[2]</td><td>“Classifier chains for multi-label classification”,
 Read, J., Pfahringer, B., Holmes, G. &amp; Frank, E. (2009).
 In Proceedings of European conference on Machine Learning and
 Knowledge Discovery in Databases 2009 (ECML PKDD 2009), Part II,
@@ -222,19 +248,53 @@ LNAI 5782(pp. 254-269). Berlin: Springer.</td></tr>
 </table>
 </div>
 </div>
+<div class="section" id="probabilistic-classifier-chains">
+<h2>Probabilistic Classifier Chains<a class="headerlink" href="#probabilistic-classifier-chains" title="Permalink to this headline">¶</a></h2>
+<p>Probabilistic Classifier Chains
+(<a class="reference internal" href="modules/problem_transformation.html#skml.problem_transformation.ProbabilisticClassifierChain" title="skml.problem_transformation.ProbabilisticClassifierChain"><code class="xref py py-mod docutils literal notranslate"><span class="pre">skml.problem_transformation.ProbabilisticClassifierChain</span></code></a>)
+–also known as PCC–
+are an extension to the classic Classifier Chains
+(<a class="reference internal" href="modules/problem_transformation.html#skml.problem_transformation.ClassifierChain" title="skml.problem_transformation.ClassifierChain"><code class="xref py py-mod docutils literal notranslate"><span class="pre">skml.problem_transformation.ClassifierChain</span></code></a>)
+and can be seen as a discrete greedy approximation of probabilistic classifier chains
+with probabilities valued zero/one [3].</p>
+<p>For each label a classifier is trained as in CC, however probabilistic classifiers
+are used. In fact [3], when used with non-probabilistic classifiers, CC is recovered
+from the posterior probability distribution <img class="math" src="_images/math/86a4d465693a9ee0aabfb73335d2991bc07f8d5a.png" alt="\mathbf{P}_\mathbf{y}(\mathbf{x})"/>.</p>
+<p>Note, that PCC performs best, when a loss function that models label
+interdendence (such as Subset 0/1 loss) is used, and the labels in the
+data set are in fact interdependent. For more information on this,
+see [3].</p>
+<p>The training is equivalent to CC, the inference (prediction) however is
+more complex. For a detailed description of the inference, see
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">skml.problem_transformation.ProbabilisticClassifierChains</span></code> directly,
+have a look at the source code, or refer to the paper [3].</p>
+<div class="topic">
+<p class="topic-title first">References:</p>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td>“Bayes Optimal Multilabel Classification via Probabilistic Classifier Chains”,
+K. Dembczynski, W. Cheng, E. Hüllermeier (2010). ICML 2010</td></tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 
 
+           </div>
+           <div class="articleComments">
+            
            </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ensemble.html" class="btn btn-neutral float-right" title="Ensemble Methods" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ensemble.html" class="btn btn-neutral float-right" title="Ensemble Methods" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="datasets.html" class="btn btn-neutral" title="Multi-label Datasets" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="datasets.html" class="btn btn-neutral" title="Multi-label Datasets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -268,7 +328,8 @@ LNAI 5782(pp. 254-269). Berlin: Springer.</td></tr>
             VERSION:'0.1.0b',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>

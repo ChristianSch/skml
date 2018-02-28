@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -37,7 +39,6 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="skml 0.1.0b documentation" href="../index.html"/>
         <link rel="up" title="API Documentation" href="../api.html"/>
-        <link rel="next" title="Ensemble Methods" href="ensemble.html"/>
         <link rel="prev" title="API Documentation" href="../api.html"/> 
 
   
@@ -47,6 +48,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -87,9 +89,14 @@
           
             
             
-                <ul class="current">
+              
+            
+            
+              <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documentation</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Problem Transformation Methods</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Problem Transformation Methods</a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="ensemble.html">Ensemble Methods</a></li>
 </ul>
 </li>
@@ -107,8 +114,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">skml</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">skml</a>
+        
       </nav>
 
 
@@ -117,25 +126,42 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../api.html">API Documentation</a> &raquo;</li>
-      
-    <li>Problem Transformation Methods</li>
+        
+      <li>Problem Transformation Methods</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
-            <a href="../_sources/modules/problem_transformation.txt" rel="nofollow"> View page source</a>
+            
+            <a href="../_sources/modules/problem_transformation.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -154,6 +180,29 @@ where for each possible subset of the label powerset a classifier is
 trained, which classifies whether or not the label subset should be
 assigned to the given instance or not.</p>
 <p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#skml.problem_transformation.LabelPowerset.fit" title="skml.problem_transformation.LabelPowerset.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a>(X,&nbsp;y)</td>
+<td>Fit underlying estimators.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</td>
+<td>Get parameters for this estimator.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#skml.problem_transformation.LabelPowerset.predict" title="skml.problem_transformation.LabelPowerset.predict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code></a>(X)</td>
+<td>Predicts the labels for the given instances.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">score</span></code>(X,&nbsp;y[,&nbsp;sample_weight])</td>
+<td>Returns the mean accuracy on the given test data and labels.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</td>
+<td>Set the parameters of this estimator.</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="skml.problem_transformation.LabelPowerset.__init__">
 <code class="descname">__init__</code><span class="sig-paren">(</span><em>estimator</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/skml/problem_transformation/label_powerset.html#LabelPowerset.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skml.problem_transformation.LabelPowerset.__init__" title="Permalink to this definition">¶</a></dt>
@@ -171,10 +220,10 @@ computational problems.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>estimator</strong> : scikit-learn compatible classifier instance. Will be</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>estimator</strong> : scikit-learn compatible classifier instance</p>
 <blockquote>
-<div><p>copied (with all hyperparameters) before use, hence will
-be left untouched.</p>
+<div><p>Will be copied (with all hyperparameters) before use,
+hence original will be left untouched.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -195,11 +244,11 @@ be left untouched.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : (sparse) array-like, shape = [n_samples, n_features]</p>
 <blockquote>
-<div><p>Data.</p>
+<div><p>Data</p>
 </div></blockquote>
 <p><strong>y</strong> : (sparse) array-like, shape = [n_samples, ], [n_samples, n_classes]</p>
 <blockquote class="last">
-<div><p>Multi-label targets.</p>
+<div><p>Multi-label targets</p>
 </div></blockquote>
 </td>
 </tr>
@@ -217,7 +266,7 @@ be left untouched.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : (sparse) array-like, shape = [n_samples, n_features]</p>
 <blockquote>
-<div><p>Data.</p>
+<div><p>Data</p>
 </div></blockquote>
 </td>
 </tr>
@@ -238,8 +287,31 @@ be left untouched.</p>
 <em class="property">class </em><code class="descclassname">skml.problem_transformation.</code><code class="descname">BinaryRelevance</code><span class="sig-paren">(</span><em>estimator</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/skml/problem_transformation/binary_relevance.html#BinaryRelevance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skml.problem_transformation.BinaryRelevance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implements the binary relevance problem transformation strategy,
 where for each label a distinct binary classifier is trained to
-classify whether the instance should be part of the class or not.</p>
+classify whether label should be assigned to an instance or not.</p>
 <p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#skml.problem_transformation.BinaryRelevance.fit" title="skml.problem_transformation.BinaryRelevance.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a>(X,&nbsp;y)</td>
+<td>Fit underlying estimators.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</td>
+<td>Get parameters for this estimator.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#skml.problem_transformation.BinaryRelevance.predict" title="skml.problem_transformation.BinaryRelevance.predict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code></a>(X)</td>
+<td>Predicts the labels for the given instances.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">score</span></code>(X,&nbsp;y[,&nbsp;sample_weight])</td>
+<td>Returns the mean accuracy on the given test data and labels.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</td>
+<td>Set the parameters of this estimator.</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="skml.problem_transformation.BinaryRelevance.__init__">
 <code class="descname">__init__</code><span class="sig-paren">(</span><em>estimator</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/skml/problem_transformation/binary_relevance.html#BinaryRelevance.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skml.problem_transformation.BinaryRelevance.__init__" title="Permalink to this definition">¶</a></dt>
@@ -249,20 +321,15 @@ estimators predicting a single label for an instance.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>classifier</strong> : scikit-learn compatible classifier instance. Will be</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>estimator :</strong></p>
 <blockquote>
-<div><p>copied (with all hyperparameters) before use, hence will
-be left untouched.</p>
+<div><p>scikit-learn compatible classifier instance. Will be
+copied (with all hyperparameters) before use, hence
+original will be left untouched.</p>
 </div></blockquote>
-<p><strong>number_of_chains</strong> : Number of chains the ensemble shall train</p>
-<p><strong>threshold</strong> : Decision threshold to assign a label or not. Has to be</p>
-<blockquote>
-<div><p>between 0 and 1.</p>
-</div></blockquote>
-<p><strong>max_features</strong> : Number of features to draw from.</p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">ensemble classifier chain instance</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Binary relevance problem transformed MLC classifier</p>
 </td>
 </tr>
 </tbody>
@@ -279,11 +346,11 @@ be left untouched.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : (sparse) array-like, shape = [n_samples, n_features]</p>
 <blockquote>
-<div><p>Data.</p>
+<div><p>Data</p>
 </div></blockquote>
 <p><strong>y</strong> : (sparse) array-like, shape = [n_samples, ], [n_samples, n_classes]</p>
 <blockquote class="last">
-<div><p>Multi-label targets.</p>
+<div><p>Multi-label targets</p>
 </div></blockquote>
 </td>
 </tr>
@@ -315,41 +382,15 @@ be left untouched.</p>
 </table>
 </dd></dl>
 
-<dl class="method">
-<dt id="skml.problem_transformation.BinaryRelevance.predict_proba">
-<code class="descname">predict_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/skml/problem_transformation/binary_relevance.html#BinaryRelevance.predict_proba"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skml.problem_transformation.BinaryRelevance.predict_proba" title="Permalink to this definition">¶</a></dt>
-<dd><p>Predicts the label probabilites for the given instances. Note that
-these probabilities might not be obtainable, depending on the used
-classifiers. They also might have to be calibrated.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : (sparse) array-like, shape = [n_samples, n_features]</p>
-<blockquote>
-<div><p>Data.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">array-like, shape = [n_samples, n_labels]</p>
-<blockquote class="last">
-<div><p>Estimated labels</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
 <dt id="skml.problem_transformation.ClassifierChain">
-<em class="property">class </em><code class="descclassname">skml.problem_transformation.</code><code class="descname">ClassifierChain</code><span class="sig-paren">(</span><em>estimator</em>, <em>threshold=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/skml/problem_transformation/classifier_chain.html#ClassifierChain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skml.problem_transformation.ClassifierChain" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">skml.problem_transformation.</code><code class="descname">ClassifierChain</code><span class="sig-paren">(</span><em>estimator</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/skml/problem_transformation/classifier_chain.html#ClassifierChain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skml.problem_transformation.ClassifierChain" title="Permalink to this definition">¶</a></dt>
 <dd><p>This classifier constructs a chain of classifiers for multi-label
 classification (MLC).
 For each label (which ought to be given as a binary label indicator vector,
-where 0 stands for &#8220;instance does not have label, 1 otherwise&#8221;) a
+where 0 stands for “instance does not have label, 1 otherwise”) a
 classifier is trained. The classifier predicts one label, and one only
 (called binary relevance). The first classifier predicts the first label of
 the label vector (which outputs 0 or 1), whereas the second predicts the
@@ -357,9 +398,32 @@ second label, but the first label is appended to the feature vector (X[i]).
 The n-th classifier predicts the n-th label given the feature vector,
 where the (n-1)-th labels are appended to.</p>
 <p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#skml.problem_transformation.ClassifierChain.fit" title="skml.problem_transformation.ClassifierChain.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a>(X,&nbsp;y)</td>
+<td>Fit underlying estimators.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</td>
+<td>Get parameters for this estimator.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#skml.problem_transformation.ClassifierChain.predict" title="skml.problem_transformation.ClassifierChain.predict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code></a>(X)</td>
+<td>Predicts the labels for the given instances.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">score</span></code>(X,&nbsp;y[,&nbsp;sample_weight])</td>
+<td>Returns the mean accuracy on the given test data and labels.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</td>
+<td>Set the parameters of this estimator.</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="skml.problem_transformation.ClassifierChain.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>estimator</em>, <em>threshold=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/skml/problem_transformation/classifier_chain.html#ClassifierChain.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skml.problem_transformation.ClassifierChain.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>estimator</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/skml/problem_transformation/classifier_chain.html#ClassifierChain.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skml.problem_transformation.ClassifierChain.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Classifer Chain multi-label strategy</p>
 <p>Builds a new classifier chain using the given classifier, which is
 copied <img class="math" src="../_images/math/65dd185e01cea71ae44ec421281a77a697a972d0.png" alt="|\mathcal{L}|"/> times (L is the set of labels).</p>
@@ -367,7 +431,12 @@ copied <img class="math" src="../_images/math/65dd185e01cea71ae44ec421281a77a697
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>classifier</strong> : The classifier used to build a chain of classifiers.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>estimator</strong> : scikit-learn compatible classifier instance</p>
+<blockquote class="last">
+<div><p>The classifier used to build a chain of classifiers.
+Will be copied, hence the original will be left untouched.</p>
+</div></blockquote>
+</td>
 </tr>
 </tbody>
 </table>
@@ -387,7 +456,7 @@ copied <img class="math" src="../_images/math/65dd185e01cea71ae44ec421281a77a697
 </div></blockquote>
 <p><strong>y</strong> : (sparse) array-like, shape = [n_samples, ], [n_samples, n_classes]</p>
 <blockquote class="last">
-<div><p>Multi-label targets.</p>
+<div><p>Multi-label targets encoded as binary vectors.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -419,13 +488,93 @@ copied <img class="math" src="../_images/math/65dd185e01cea71ae44ec421281a77a697
 </table>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="class">
+<dt id="skml.problem_transformation.ProbabilisticClassifierChain">
+<em class="property">class </em><code class="descclassname">skml.problem_transformation.</code><code class="descname">ProbabilisticClassifierChain</code><span class="sig-paren">(</span><em>estimator</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/skml/problem_transformation/probabilistic_classifier_chain.html#ProbabilisticClassifierChain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skml.problem_transformation.ProbabilisticClassifierChain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learns a chain of classifiers. If the input data is given as
+<img class="math" src="../_images/math/2b328c8508770369b4d2a42d69ccb8aebc310596.png" alt="\mathbf{x}\in\mathcal{X}"/>, and the target data as a set
+<img class="math" src="../_images/math/3c711c683933d905222c0d6ff24b491f24c95091.png" alt="\lambda =\{\lambda_1,\cdots,\lambda_m\}"/>, then
+<img class="math" src="../_images/math/65dd185e01cea71ae44ec421281a77a697a972d0.png" alt="|\mathcal{L}|"/>
+classifiers are learned as follows:</p>
+<div class="math">
+<p><img src="../_images/math/7d649fff23ccc082ab2591aa14b0967d06e1b5f9.png" alt="f_i: \mathcal{X} \times \{0,1\}^{i-1} \rightarrow [0,1]
+
+(\mathbf{x},y_1,\cdots,y_{i-1})\mapsto
+\mathbf{P}(y_i=1|\mathbf{x},y_1,\cdots,y_{i=1})"/></p>
+</div><p>So each classifier <img class="math" src="../_images/math/32c776976a60205210b12dc2566b5f2b2a81f7bf.png" alt="f_i"/> is trained on an augmented input
+space <img class="math" src="../_images/math/8d3b95c9798b81f9696bfefca2885a4397322065.png" alt="\mathcal{X} \times\{0,1\}^{i-1}"/>. NB: it is implied
+that the classifier predicts the probability of <img class="math" src="../_images/math/a4afbdaa5395cba2d742177c90f1834a6f79ee82.png" alt="y_i=1"/>,
+so it has to support <cite>predict_proba(X)</cite>.</p>
+<p>The inference of the most probable label set is then determined
+via:</p>
+<div class="math">
+<p><img src="../_images/math/2511a2fc714b14b64c09e7dd6c5311f3d851c420.png" alt="\mathbf{h}^* = \arg \max_{y\in\mathcal{Y}}
+\mathbf{P}_\mathbf{x}(\mathbf{y})"/></p>
+</div><p>where <img class="math" src="../_images/math/976ac16918f0e02cf5b2c31eb7826222f2709950.png" alt="\mathbf{P}_\mathbf{x}(\mathbf{y})"/> is given as:</p>
+<div class="math">
+<p><img src="../_images/math/3707ec61a76e050bb4c2c744cbae7ba94f36522e.png" alt="P_\mathbf{x}(y) = P_\mathbf{x}(y_1)\cdot
+\prod^m_{i=2}P_\mathbf{x}(y_i|y_1,\cdots,y_{i-1})
+
+= P(\mathbf{y}|\mathbf{x}) = P(y_1|\mathbf{x})\cdot
+\prod^m_{i=2}P(y_i|\mathbf{x},y_1,\cdots,y_{i-1})
+
+⁼ P(\mathbf{y}|\mathbf{x}) = f_1(\mathbf{x})"/></p>
+</div><p>For each label combination in <img class="math" src="../_images/math/4d961d983ef489189a38d26b313c73a3a389c307.png" alt="2^{|\mathcal{L}|}"/>
+a posterior probability estimate has to be calculated,
+so the original paper [3] notes feasibility for settings with
+a label space bounded by <img class="math" src="../_images/math/0d64b046be8189a1e8c8da8a8324276a98a8bb38.png" alt="|\mathcal{L}| \leq 15"/>.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(X,&nbsp;y)</td>
+<td>Fit underlying estimators.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</td>
+<td>Get parameters for this estimator.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#skml.problem_transformation.ProbabilisticClassifierChain.predict" title="skml.problem_transformation.ProbabilisticClassifierChain.predict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code></a>(X)</td>
+<td>Predicts the labels for the given instances.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">score</span></code>(X,&nbsp;y[,&nbsp;sample_weight])</td>
+<td>Returns the mean accuracy on the given test data and labels.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</td>
+<td>Set the parameters of this estimator.</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
-<dt id="skml.problem_transformation.ClassifierChain.predict_proba">
-<code class="descname">predict_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/skml/problem_transformation/classifier_chain.html#ClassifierChain.predict_proba"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skml.problem_transformation.ClassifierChain.predict_proba" title="Permalink to this definition">¶</a></dt>
-<dd><p>Predicts the label probabilites for the given instances. Note that
-these probabilities might not be obtainable, depending on the used
-classifiers. They also might have to be calibrated, in order to get
-proper probabilities.</p>
+<dt id="skml.problem_transformation.ProbabilisticClassifierChain.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>estimator</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/skml/problem_transformation/probabilistic_classifier_chain.html#ProbabilisticClassifierChain.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skml.problem_transformation.ProbabilisticClassifierChain.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Probabilistic Classifer Chain multi-label strategy</p>
+<p>Builds a new probabilistic classifier chain using the given
+classifier, which is copied <img class="math" src="../_images/math/65dd185e01cea71ae44ec421281a77a697a972d0.png" alt="|\mathcal{L}|"/> times
+(L is the set of labels).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>estimator</strong> : scikit-learn compatible classifier instance</p>
+<blockquote class="last">
+<div><p>The classifier used to build a chain of classifiers.
+Will be copied, hence the original will be left untouched.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="skml.problem_transformation.ProbabilisticClassifierChain.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/skml/problem_transformation/probabilistic_classifier_chain.html#ProbabilisticClassifierChain.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skml.problem_transformation.ProbabilisticClassifierChain.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predicts the labels for the given instances.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -452,15 +601,16 @@ proper probabilities.</p>
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ensemble.html" class="btn btn-neutral float-right" title="Ensemble Methods" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="../api.html" class="btn btn-neutral" title="API Documentation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../api.html" class="btn btn-neutral" title="API Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -494,7 +644,8 @@ proper probabilities.</p>
             VERSION:'0.1.0b',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>
