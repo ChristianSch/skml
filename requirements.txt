@@ -10,5 +10,5 @@ scikit-multilearn
 sphinx
 matplotlib
 nose
-arff
+liac-arff
 future
