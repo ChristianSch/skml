@@ -168,6 +168,8 @@
             
   <div class="section" id="multi-label-data-sets">
 <h1>Multi-label Data Sets<a class="headerlink" href="#multi-label-data-sets" title="Permalink to this headline">¶</a></h1>
+<p>This sub-module provides loading of data sets and down sampling of the
+label space.</p>
 <dl class="function">
 <dt id="skml.datasets.load_dataset">
 <code class="descclassname">skml.datasets.</code><code class="descname">load_dataset</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/skml/datasets/load_datasets.html#load_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skml.datasets.load_dataset" title="Permalink to this definition">¶</a></dt>
@@ -179,6 +181,36 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : string</p>
 <blockquote class="last">
 <div><p>Name of the dataset. Currently only ‘yeast’ is available.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skml.datasets.sample_down_label_space">
+<code class="descclassname">skml.datasets.</code><code class="descname">sample_down_label_space</code><span class="sig-paren">(</span><em>y</em>, <em>k</em>, <em>method='most-frequent'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/skml/datasets/sample_down_label_space.html#sample_down_label_space"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#skml.datasets.sample_down_label_space" title="Permalink to this definition">¶</a></dt>
+<dd><p>Samples down label space, such that the returned label
+space retains order of the original labels, but
+removes labels which do not meet certain criteria
+(see <cite>method</cite>).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>y</strong> : (sparse) array-like, shape = [n_samples, ], [n_samples, n_classes]</p>
+<blockquote>
+<div><p>Multi-label targets</p>
+</div></blockquote>
+<p><strong>k</strong> : number</p>
+<blockquote>
+<div><p>Number of returned labels</p>
+</div></blockquote>
+<p><strong>method</strong> : string, default = ‘most-frequent’</p>
+<blockquote class="last">
+<div><p>Method to sample the label space down. Currently supported
+is only by top k most frequent labels.</p>
 </div></blockquote>
 </td>
 </tr>

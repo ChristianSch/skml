@@ -235,7 +235,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
   ('index', 'project-template.tex', u'project-template Documentation',
-   u'Vighnesh Birodkar', 'manual'),
+   u'Christian Schulze', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -265,7 +265,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'project-template', u'project-template Documentation',
-     [u'Vighnesh Birodkar'], 1)
+     [u'Christian Schulze'], 1)
 ]
 
 # If true, show URL addresses after external links.
