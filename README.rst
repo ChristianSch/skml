@@ -15,12 +15,28 @@ Currently Supported
     * Binary Relevance
     * Label Powerset
     * Classifier Chains
+    * Probabilistic Classifier Chains
 * Ensembles:
     * Ensemble Classifier Chain
+
+Installation
+------------
+For production install via pip:
+```
+pip install skml
+```
+
+For development, clone this repo, change to the directory of skml
+and inside of the skml directory run the following:
+```
+pip install -e .[dev]
+python setup.
+```
 
 
 Python Supported
 ----------------
 Due to dependencies we do not check for a working distribution of skml for the
 following Python versions:
+
 * 3.2
