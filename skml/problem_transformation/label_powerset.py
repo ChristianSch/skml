@@ -1,8 +1,8 @@
-from sklearn.base import clone
 import random
 import numpy as np
 from sklearn.base import BaseEstimator, MetaEstimatorMixin, ClassifierMixin
 from sklearn.utils import validation
+from sklearn.base import clone
 
 
 class LabelPowerset(

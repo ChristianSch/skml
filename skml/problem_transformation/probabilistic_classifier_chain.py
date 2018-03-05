@@ -1,7 +1,7 @@
+import numpy as np
 from sklearn.base import clone
 from sklearn.utils import validation
 from .classifier_chain import ClassifierChain
-import numpy as np
 
 
 class ProbabilisticClassifierChain(ClassifierChain):

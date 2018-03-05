@@ -1,7 +1,7 @@
+import numpy as np
 from sklearn.base import clone
 from sklearn.base import BaseEstimator, MetaEstimatorMixin, ClassifierMixin
 from sklearn.utils import validation
-import numpy as np
 
 
 class ClassifierChain(BaseEstimator, MetaEstimatorMixin, ClassifierMixin):
