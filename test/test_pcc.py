@@ -48,7 +48,7 @@ class TestPCC(Chai):
         clf.fit(X, y)
 
         y_pred = clf.predict(X)
-        assert_true(y_pred.shape[0] == y.shape[0])
+        assert_true(y_pred.shape == y.shape)
 
     def test_pcc_fit_predict_sparse(self):
         # test fit/predict of sparse matrices
