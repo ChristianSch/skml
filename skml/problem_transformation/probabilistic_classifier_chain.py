@@ -120,3 +120,49 @@ class ProbabilisticClassifierChain(ClassifierChain):
             Y.append(y_out)
 
         return np.array(Y)
+
+    def predict_proba(self, X):
+        """
+        Predicts the label probabilities for the given instances.
+
+        Parameters
+        ----------
+        X : (sparse) array-like, shape = [n_samples, n_features]
+            Data.
+
+        Returns
+        -------
+        array-like, shape = [n_samples, n_labels]
+            Estimated labels
+        """
+        validation.check_is_fitted(self, 'estimators_')
+
+        Y = []
+        N_instances = X.shape[0]
+
+        for n in range(N_instances):
+            x = X[n].reshape(1, -1)
+            y_out = None
+            p_max = 0
+
+            for b in range(2 ** self.L):
+                p = np.zeros((1, self.L))
+                y = np.array(list(map(int, np.binary_repr(b, width=self.L))))
+
+                for i, c in enumerate(self.estimators_):
+                    if i == 0:
+                        p[0, i] = c.predict_proba(x)[0][y[i]]
+                    else:
+                        stacked = np.hstack((x, y[:i].reshape(1, -1))) \
+                            .reshape(1, -1)
+                        p[0, i] = c.predict_proba(stacked)[0][y[i]]
+
+                pp = np.prod(p)
+
+                if pp > p_max:
+                    y_out = p
+                    p_max = pp
+
+            Y.append(y_out)
+
+        return np.array(Y)
