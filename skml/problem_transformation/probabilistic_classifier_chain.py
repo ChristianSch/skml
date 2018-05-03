@@ -151,11 +151,13 @@ class ProbabilisticClassifierChain(ClassifierChain):
 
                 for i, c in enumerate(self.estimators_):
                     if i == 0:
-                        p[0, i] = c.predict_proba(x)[0][y[i]]
+                        p[0, i] = c.predict_proba(x)[0][1]
+                        # p[0, i] = c.predict_proba(x)[0][y[i]]
                     else:
                         stacked = np.hstack((x, y[:i].reshape(1, -1))) \
                             .reshape(1, -1)
-                        p[0, i] = c.predict_proba(stacked)[0][y[i]]
+                        p[0, i] = c.predict_proba(stacked)[0][1]
+                        # p[0, i] = c.predict_proba(stacked)[0][y[i]]
 
                 pp = np.prod(p)
 
